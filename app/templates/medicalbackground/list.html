@@ -1,0 +1,34 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+{% endblock %}
+
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 30%;">Paciente</th>
+        <th scope="col" style="width: 20%;">Fecha Carga</th>
+        <th scope="col" style="width: 20%;">Fecha Modificación</th>
+        <th scope="col" style="width: 20%;">Profesional</th>
+        <th scope="col" style="width: 10%;">Opciones</th>
+
+    </tr>
+{% endblock %}
+
+{% block rows %}
+{% for c in object_list %}
+<tr>
+    <td>{{patient}}</td>
+    <td>{{c.date_created|date:"SHORT_DATE_FORMAT" }}</td>
+    <td>{{c.date_changed|date:"SHORT_DATE_FORMAT" }}</td>
+    <td>AGREGAR PROFESIONAL</td>
+
+    <td>
+        <a href="{% url 'app:updateMedicalBackground' c.id %}" class="btn btn-warning btn-xs btn-rounded"><i class="fas fa-edit"></i></a>
+        <a href="" class="btn btn-danger btn-xs btn-rounded"><i class="fas fa-trash-alt"></i></a>
+    </td>
+
+</tr>
+
+
+{% endfor %}
+{% endblock %}

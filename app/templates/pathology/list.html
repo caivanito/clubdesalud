@@ -1,0 +1,30 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+{% endblock %}
+
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 30%;">Patología</th>
+        <th scope="col" style="width: 60%;">Descripción</th>
+        <th scope="col" style="width: 10%;">Opciones</th>
+
+    </tr>
+{% endblock %}
+
+{% block rows %}
+{% for c in object_list %}
+<tr>
+    <td>{{c.name}}</td>
+    <td>{{c.description}}</td>
+
+    <td>
+        <a href="#" class="btn btn-warning btn-xs btn-rounded"><i class="fas fa-edit"></i></a>
+        <a href="#" class="btn btn-danger btn-xs btn-rounded"><i class="fas fa-trash-alt"></i></a>
+    </td>
+
+</tr>
+
+
+{% endfor %}
+{% endblock %}

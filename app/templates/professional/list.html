@@ -1,0 +1,40 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+{% endblock %}
+
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 15%;">Nombre</th>
+        <th scope="col" style="width: 15%;">Apellido</th>
+        <th scope="col" style="width: 10%;">DNI</th>
+        <th scope="col" style="width: 10%;">Email</th>
+        <th scope="col" style="width: 40%;">Especialidades</th>
+        <th scope="col" style="width: 10%;">Opciones</th>
+
+    </tr>
+{% endblock %}
+
+{% block rows %}
+{% for c in object_list %}
+<tr>
+    <td>{{c.first_name}}</td>
+    <td>{{c.last_name}}</td>
+    <td>{{c.dni}}</td>
+    <td>{{c.email}}</td>
+    <td>
+        {% for e in c.specialties.all %}
+            {{ e.name }}<br>
+        {% endfor %}
+
+    </td>
+    <td>
+        <a href="{% url 'app:professional_update' c.id %}" class="btn btn-warning btn-xs btn-rounded" title="Editar"><i class="fas fa-edit"></i></a>
+        <a href="{% url 'app:professional_delete' c.id %}" class="btn btn-danger btn-xs btn-rounded" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+    </td>
+
+</tr>
+
+
+{% endfor %}
+{% endblock %}

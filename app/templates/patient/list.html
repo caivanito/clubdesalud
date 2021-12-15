@@ -1,0 +1,45 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+{% endblock %}
+
+{% block columns %}
+<tr>
+    <th scope="col" style="width: 15%;">Nombre</th>
+    <th scope="col" style="width: 15%;">Apellido</th>
+    <th scope="col" style="width: 10%;">DNI</th>
+    <th scope="col" style="width: 10%;">Email</th>
+    <th scope="col" style="width: 30%;">Prestación</th>
+    <th scope="col" style="width: 10%;">Antecedentes</th>
+    <th scope="col" style="width: 10%;">Opciones</th>
+
+</tr>
+{% endblock %}
+
+{% block rows %}
+{% for c in object_list %}
+<tr>
+    <td>{{c.first_name}}</td>
+    <td>{{c.last_name}}</td>
+    <td>{{c.dni}}</td>
+    <td>{{c.email}}</td>
+    <td>{{ c.benefit }} - {{c.benefit_type}}</td>
+    <td>
+        <a href="{% url 'app:listMedicalBackground' c.id %}" class="btn btn-dark btn-xs btn-rounded"
+           title="Visualizar Antecedentes Médicos"><i class="fas fa-copy"></i></a>
+        <a href="{% url 'app:addMedicalBackground' c.id %}" class="btn btn-success btn-xs btn-rounded"
+           title="Agregar Antecedentes Médicos"><i class="fas fa-plus-circle"></i></a>
+    </td>
+    <td>
+        <a href="{% url 'app:patient_update' c.id %}" class="btn btn-warning btn-xs btn-rounded"
+           title="Editar Datos Personales"><i
+                class="fas fa-edit"></i></a>
+        <a href="{% url 'app:patient_delete' c.id %}" class="btn btn-danger btn-xs btn-rounded" title="Eliminar"><i
+                class="fas fa-trash-alt"></i></a>
+    </td>
+
+</tr>
+
+
+{% endfor %}
+{% endblock %}

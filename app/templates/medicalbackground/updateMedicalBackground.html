@@ -1,0 +1,362 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<form method="post" action="." enctype="multipart/form-data">
+    <div class="card card-secondary">
+        <div class="card-header">
+            <h3 class="card-title">
+                {% if action == 'add' %}
+                <i class="fas fa-plus"></i>
+                {% else %}
+                <i class="fas fa-edit"></i>
+                {% endif %}
+
+                {{ title }}
+            </h3>
+        </div>
+        <div class="card-body">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="{{ action }}">
+            {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-ban"></i> Ha ocurrido un error al querer guardar el registro</h5>
+                <ul>
+                    {% for field in form %}
+                    {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            <div class="form">
+                <div class="row">
+
+                    <div class="col-sm-2">
+                        <label>{{ form.weight.label }}:</label>
+                        <br>
+                        {{ form.weight }}
+                    </div>
+                    <div class="col-sm-2">
+                        <label>{{ form.height.label }}:</label>
+                        <br>
+                        {{ form.height }}
+                    </div>
+                    <div class="col-sm-3">
+                        <label>{{ form.bmi.label }}:</label>
+                        <br>
+                        <div class="input-group">
+                            {{ form.bmi }}
+                            <div class="input-group-append">
+                                <button class=" btn btn-rounded btn-outline-success btn-sm calcIMC">Calcular IMC
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label>{{ form.abdominal_perimeter.label }}:</label>
+                        <br>
+                        {{ form.abdominal_perimeter }}
+                    </div>
+                    <div class="col-sm-2">
+                        <label>{{ form.measured_date.label }}:</label>
+                        <br>
+                        {{ form.measured_date }}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>{{ form.blood_pressure_high.label }}:</label>
+                        <br>
+                        {{ form.blood_pressure_high }}
+                    </div>
+                    <div class="col-sm-2">
+                        <label>{{ form.blood_pressure_low.label }}:</label>
+                        <br>
+                        {{ form.blood_pressure_low }}
+                    </div>
+                    <div class="col-sm-6">
+                        <label>{{ form.medic.label }}:</label>
+                        <br>
+                        {{ form.medic }}
+                    </div>
+                    <div class="col-sm-2">
+                        <label>{{ form.enrollment.label }}:</label>
+                        <br>
+                        {{ form.enrollment }}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm">
+                        <label>{{ form.risk_factors.label }}:</label>
+                        <br>
+                        {{ form.risk_factors }}
+                    </div>
+
+                </div>
+                <hr>
+            </div>
+
+
+            {{ observation_formset.management_form }}
+            {% for form in observation_formset %}
+            <div class="form-observation">
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>{{ form.observation.label }}:</label>
+                    </div>
+                    <div class="col-sm">
+                        <div class="input-group">
+                            {{ form.observation }}
+                            <div class="input-group-append">
+                                <button class="btn btn-success add-form-observation">+</button>
+                                <div class="col-sm">
+                                    <i class="fas fa-trash-alt"></i>
+                                    {{form.DELETE}}
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <hr>
+
+
+            {{ medication_formset.management_form }}
+            {% for form in medication_formset %}
+            <div class="form-medication">
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>{{ form.medication.label }}:</label>
+                    </div>
+                    <div class="col-sm">
+                        <div class="input-group">
+                            {{ form.medication }}
+                            <div class="input-group-append">
+                                <button class="btn btn-success add-form-medication">+</button>
+                                <div class="col-sm">
+                                    <i class="fas fa-trash-alt"></i>
+                                    {{form.DELETE}}
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <hr>
+
+            <h4>Antecedentes Quirúrgicos</h4>
+            <hr>
+            {{ surgical_formset.management_form }}
+            {% for form in surgical_formset %}
+            <div class="form-surgical">
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>{{ form.surgical_history.label }}:</label>
+                        <br>
+                        <div class="input-group">
+                            {{ form.surgical_history }}
+                            <div class="input-group-append">
+                                <button class="btn btn-success add-form-surgical">+</button>
+                                <div class="col-sm">
+                                    <i class="fas fa-trash-alt"></i>
+                                    {{form.DELETE}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label>{{ form.date_surgical.label }}:</label>
+                        <br>
+                        {{ form.date_surgical }}
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label>{{ form.institution.label }}:</label>
+                        <br>
+                        {{ form.institution }}
+                    </div>
+                    <div class="col-sm-3">
+                        <label>{{ form.sequel.label }}:</label>
+                        {{ form.sequel }}
+                    </div>
+
+
+                </div>
+                <hr>
+
+            </div>
+            {% endfor %}
+
+            <br>
+            <h5>Historial de Modificaciones:</h5>
+            <hr>
+            <div class="row">
+                <div class="col-sm-12">
+                    <label>Fecha de Creación:</label>
+                    {{ c_date|date:"SHORT_DATE_FORMAT" }}
+                    <br>
+                </div>
+                <div class="col-sm-12">
+                    <label>Fecha de Modificación:</label>
+                    {{ m_date|date:"SHORT_DATE_FORMAT" }}
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-rounded btn-outline-dark">
+            <i class="fas fa-save"></i> Guardar Registro
+        </button>
+        <a href="{{ list_url }}" class="btn btn-rounded btn-outline-danger">
+            <i class="fas fa-times"></i> Cancelar
+        </a>
+    </div>
+</form>
+
+
+<script type="text/javascript">
+function updateElementIndex(el, prefix, ndx) {
+    var id_regex = new RegExp('(' + prefix + '-\\d+)');
+    var replacement = prefix + '-' + ndx;
+    if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+    if (el.id) el.id = el.id.replace(id_regex, replacement);
+    if (el.name) el.name = el.name.replace(id_regex, replacement);
+}
+function cloneMore(selector, prefix, full) {
+    var newElement = $(selector).clone(true);
+    var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+    newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
+        var name = $(this).attr('name')
+        if(name) {
+            name = name.replace('-' + (total-1) + '-', '-' + total + '-');
+            var id = 'id_' + name;
+            $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+        }
+    });
+    newElement.find('label').each(function() {
+        var forValue = $(this).attr('for');
+        if (forValue) {
+          forValue = forValue.replace('-' + (total-1) + '-', '-' + total + '-');
+          $(this).attr({'for': forValue});
+        }
+    });
+    total++;
+    $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+    $(selector).after(newElement);
+    var conditionRow = $(full + ':not(:last)');
+    var button = '.btn.add-form-' + prefix;
+    var class_add = 'add-form-' + prefix;
+    var class_delete = 'remove-form-' + prefix;
+    conditionRow.find(button)
+    .removeClass('btn-success').addClass('btn-rounded btn-danger')
+    .removeClass(class_add).addClass(class_delete)
+    .html('-');
+    return false;
+}
+function deleteForm(prefix, btn, full) {
+    var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+    if (total > 1){
+        btn.closest(full).remove();
+        var forms = $(full);
+        $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+        for (var i=0, formCount=forms.length; i<formCount; i++) {
+            $(forms.get(i)).find(':input').each(function() {
+                updateElementIndex(this, prefix, i);
+            });
+        }
+    }
+    return false;
+}
+$(document).on('click', '.add-form-observation', function(e){
+    e.preventDefault();
+cloneMore('div.form-observation:last', 'observation', 'div.form-observation');
+    return false;
+});
+$(document).on('click', '.remove-form-observation', function(e){
+    e.preventDefault();
+    deleteForm('observation', $(this), 'div.form-observation');
+    return false;
+});
+
+$(document).on('click', '.add-form-medication', function(e){
+    e.preventDefault();
+    cloneMore('div.form-medication:last', 'medication', 'div.form-medication');
+    return false;
+});
+$(document).on('click', '.remove-form-medication', function(e){
+    e.preventDefault();
+    deleteForm('medication', $(this), 'div.form-medication');
+    return false;
+});
+
+$(document).on('click', '.add-form-surgical', function(e){
+    e.preventDefault();
+    cloneMore('div.form-surgical:last', 'surgical', 'div.form-surgical');
+    return false;
+});
+$(document).on('click', '.remove-form-surgical', function(e){
+    e.preventDefault();
+    deleteForm('surgical', $(this), 'div.form-surgical');
+    return false;
+});
+
+
+
+
+
+
+
+</script>
+
+<!-- SCRIPT PARA CALCULAR IMC -->
+<script type="text/javascript">
+
+function calcIMC(kg, m) {
+    if(kg.value!="" && m.value!=""){
+        imc = document.getElementById("id_bmi");
+        imcx = (kg.value / (m.value* m.value));
+        imc.value = imcx;
+        console.log(imcx);
+    }else{
+        alert("Debes ingresar peso y altura.")
+    }
+
+    };
+
+$(document).on('click', '.calcIMC', function(e){
+    e.preventDefault();
+    kg = document.getElementById("id_weight");
+    m = document.getElementById("id_height");
+    calcIMC(kg, m);
+    return false;
+});
+
+
+
+
+
+
+</script>
+
+{% endblock %}

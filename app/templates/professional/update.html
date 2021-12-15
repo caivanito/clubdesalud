@@ -1,0 +1,106 @@
+{% extends 'form.html' %}
+{% block form %}
+
+<div class="form">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <label>{{ form.first_name.label }}:</label>
+            <br>
+            {{ form.first_name }}
+        </div>
+        <div class="col-sm-6">
+            <label>{{ form.last_name.label }}:</label>
+            <br>
+            {{ form.last_name }}
+        </div>
+
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <label>{{ form.dni.label }}:</label>
+            <br>
+            {{ form.dni }}
+        </div>
+        <div class="col-sm-3">
+            <label>{{ form.date_birth.label }}:</label>
+            <br>
+            {{ form.date_birth }}
+        </div>
+        <div class="col-sm-3">
+            <label>{{ form.age.label }}:</label>
+            <br>
+            {{ form.age }}
+        </div>
+        <div class="col-sm-3">
+            <label>{{ form.gender.label }}:</label>
+            <br>
+            {{ form.gender }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-4">
+            <label>{{ form.email.label }}:</label>
+            <br>
+            {{ form.email }}
+        </div>
+        <div class="col-sm-3">
+            <label>{{ form.phone_number.label }}:</label>
+            <br>
+            {{ form.phone_number }}
+        </div>
+        <div class="col-sm-5">
+            <label>{{ form.address.label }}:</label>
+            <br>
+            {{ form.address }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <label>{{ form.specialties.label }}:</label>
+            <br>
+            {{ form.specialties }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-4">
+            <label>{{ form.enrollment.label }}:</label>
+            <br>
+            {{ form.enrollment }}
+        </div>
+        <div class="col-sm-8">
+            <label>{{ form.college.label }}:</label>
+            <br>
+            {{ form.college }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <label>{{ form.other_formations.label }}:</label>
+            <br>
+            {{ form.other_formations }}
+        </div>
+
+    </div>
+    <hr>
+    <h5>Historial de Modificaciones:</h5>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <label>Fecha de Creación:</label>
+            {{ c_date|date:"SHORT_DATE_FORMAT" }}
+            <br>
+        </div>
+        <div class="col-sm-12">
+            <label>Fecha de Modificación:</label>
+            {{ m_date|date:"SHORT_DATE_FORMAT" }}
+            <br>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends 'form.html' %}
+{% block form %}
+
+<div class="form">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <label>{{ form.first_name.label }}:</label>
+            <br>
+            {{ form.first_name }}
+        </div>
+        <div class="col-sm-6">
+            <label>{{ form.last_name.label }}:</label>
+            <br>
+            {{ form.last_name }}
+        </div>
+
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <label>{{ form.dni.label }}:</label>
+            <br>
+            {{ form.dni }}
+        </div>
+        <div class="col-sm-3">
+            <label>{{ form.date_birth.label }}:</label>
+            <br>
+            {{ form.date_birth }}
+        </div>
+        <div class="col-sm-3">
+            <label>{{ form.age.label }}:</label>
+            <br>
+            {{ form.age }}
+        </div>
+        <div class="col-sm-3">
+            <label>{{ form.gender.label }}:</label>
+            <br>
+            {{ form.gender }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-4">
+            <label>{{ form.email.label }}:</label>
+            <br>
+            {{ form.email }}
+        </div>
+        <div class="col-sm-3">
+            <label>{{ form.phone_number.label }}:</label>
+            <br>
+            {{ form.phone_number }}
+        </div>
+        <div class="col-sm-5">
+            <label>{{ form.address.label }}:</label>
+            <br>
+            {{ form.address }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-4">
+            <label>{{ form.contact_number.label }}:</label>
+            <br>
+            {{ form.contact_number }}
+        </div>
+        <div class="col-sm-8">
+            <label>{{ form.relationship.label }}:</label>
+            <br>
+            {{ form.relationship }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-2">
+            <label>{{ form.benefit.label }}:</label>
+            <br>
+            {{ form.benefit }}
+        </div>
+        <div class="col-sm-6">
+            <label>{{ form.benefit_type.label }}:</label>
+            <br>
+            {{ form.benefit_type }}
+        </div>
+        <div class="col-sm-4">
+            <label>{{ form.benefit_number.label }}:</label>
+            <br>
+            {{ form.benefit_number }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-2">
+            <label>{{ form.work_activity.label }}:</label>
+            <br>
+            {{ form.work_activity }}
+        </div>
+        <div class="col-sm-10">
+            <label>{{ form.work_branch.label }}:</label>
+            <br>
+            {{ form.work_branch }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <label>{{ form.physical_activity.label }}:</label>
+            <br>
+            {{ form.physical_activity }}
+        </div>
+        <div class="col-sm-2">
+            <label>{{ form.competition.label }}:</label>
+            <br>
+            {{ form.competition }}
+        </div>
+        <div class="col-sm-7">
+            <label>{{ form.type_physical_activity.label }}:</label>
+            <br>
+            {{ form.type_physical_activity }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <label>{{ form.dominance.label }}:</label>
+            <br>
+            {{ form.dominance }}
+        </div>
+    </div>
+    <hr>
+</div>
+
+{% endblock %}
